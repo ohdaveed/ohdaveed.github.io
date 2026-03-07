@@ -1,1 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>arrizon.devm — Site solutions and audits</title>
+  <meta name="description" content="arrizon.devm — site solutions and audits." />
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --border: rgba(255,255,255,.12);
+      --accent: #7c3aed;
+      --accent2:#22c55e;
+      --max: 1080px;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(34,197,94,.25), transparent 55%),
+        radial-gradient(800px 500px at 50% 100%, rgba(59,130,246,.20), transparent 55%),
+        var(--bg);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 28px 18px 56px; }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.55);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand{ display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; }
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(124,58,237,.18);
+    }
+    .navlinks{ display: flex; align-items: center; gap: 16px; color: var(--muted); font-weight: 700; font-size: 14px; }
+    .navlinks a{ padding: 8px 10px; border-radius: 10px; }
+    .navlinks a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+
+    .hero{
+      padding: 44px 0 26px;
+      display: grid;
+      gap: 22px;
+      grid-template-columns: 1.35fr .65fr;
+      align-items: start;
+    }
+    @media (max-width: 880px){ .hero{ grid-template-columns: 1fr; } }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .heroMain{ padding: 28px; }
+    .kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: lowercase;
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 3.2vw, 46px);
+      line-height: 1.12;
+      letter-spacing: -0.6px;
+    }
+    .lead{ margin: 0; color: var(--muted); font-size: 16px; max-width: 60ch; }
+    .actions{ margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select: none;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btnPrimary{
+      border-color: rgba(124,58,237,.55);
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,197,94,.65));
+      color: #08101f;
+    }
+    .btnGhost{ background: rgba(255,255,255,.04); color: var(--text); }
+    .btnGhost:hover{ background: rgba(255,255,255,.07); }
+
+    .heroSide{ padding: 22px; }
+    .miniTitle{
+      margin: 0 0 6px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing: .2px;
+      text-transform: uppercase;
+    }
+    .stack{ margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .pill{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .pill span{ color: var(--muted); font-weight: 800; }
+
+    section{ margin-top: 18px; }
+    .grid3{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 900px){ .grid3{ grid-template-columns: 1fr; } }
+
+    .feature{ padding: 18px; }
+    .feature h3{ margin: 0 0 6px; font-size: 16px; }
+    .feature p{ margin: 0; color: var(--muted); font-size: 14px; }
+
+    .about{ padding: 22px; display: grid; gap: 10px; }
+    .about p{ margin: 0; color: var(--muted); }
+
+    .contact{ padding: 22px; display: grid; gap: 12px; }
+    .contactRow{ display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-weight: 700; font-size: 14px; }
+    .contactRow a{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+    }
+    .contactRow a:hover{ background: rgba(255,255,255,.07); color: var(--text); }
+
+    footer{ margin-top: 18px; color: rgba(255,255,255,.55); font-size: 13px; text-align: center; padding: 20px 0 0; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top">
+        <span class="dot" aria-hidden="true"></span>
+        <span>arrizon.devm</span>
+      </a>
+
+      <div class="navlinks">
+        <a href="#features">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top" class="wrap">
+    <div class="hero">
+      <div class="card heroMain">
+        <div class="kicker">site solutions • audits</div>
+        <h1>Clear, fast websites—without the fluff.</h1>
+        <p class="lead">
+          I help teams improve performance, reliability, and conversions with practical site fixes and focused audits.
+        </p>
+
+        <div class="actions">
+          <a class="btn btnPrimary" href="#contact">Request an audit</a>
+          <a class="btn btnGhost" href="https://github.com/ohdaveed" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+
+      <aside class="card heroSide" aria-label="Quick info">
+        <p class="miniTitle">What you get</p>
+        <ul class="stack">
+          <li class="pill"><strong>Speed</strong> <span>performance pass</span></li>
+          <li class="pill"><strong>SEO</strong> <span>technical checks</span></li>
+          <li class="pill"><strong>UX</strong> <span>friction cleanup</span></li>
+        </ul>
+      </aside>
+    </div>
+
+    <section id="features" class="grid3" aria-label="Services">
+      <div class="card feature">
+        <h3>Site audit</h3>
+        <p>Actionable checklist across performance, SEO, accessibility, and UX.</p>
+      </div>
+      <div class="card feature">
+        <h3>Performance fixes</h3>
+        <p>Trim bloat, improve Core Web Vitals, and ship measurable wins.</p>
+      </div>
+      <div class="card feature">
+        <h3>Landing page polish</h3>
+        <p>Cleaner layout, clearer messaging, and better conversion flow.</p>
+      </div>
+    </section>
+
+    <section id="about" class="card about" aria-label="About">
+      <h2 style="margin:0;">About</h2>
+      <p>
+        arrizon.devm provides site solutions and audits. If you want a second set of eyes on a site (or a quick
+        turnaround on improvements), reach out.
+      </p>
+    </section>
+
+    <section id="contact" class="card contact" aria-label="Contact">
+      <h2 style="margin:0;">Contact</h2>
+      <p style="margin:0; color: var(--muted);">Best way to reach me:</p>
+      <div class="contactRow">
+        <a href="mailto:arrizon.david@gmail.com">arrizon.david@gmail.com</a>
+        <a href="https://github.com/ohdaveed" target="_blank" rel="noreferrer">github.com/ohdaveed</a>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> arrizon.devm
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
